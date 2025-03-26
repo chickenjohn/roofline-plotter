@@ -33,14 +33,14 @@ class Roofline:
             raise TypeError("Palette must be a dictionary")
         self.category_colors.update(palette)
 
-    def add_point(self, throughput: float, data_amount: float, category: str) -> None:
+    def add_point(self, throughput: float, intensity: float, category: str) -> None:
         """Add a data point with category for coloring"""
-        if throughput <= 0 or data_amount <= 0:
+        if throughput <= 0 or intensity <= 0:
             raise ValueError("Throughput and data amount must be positive")
             
         self.points.append({
             'throughput': throughput,
-            'data_amount': data_amount,
+            'intensity': intensity,
             'category': category
         })
         
@@ -54,7 +54,7 @@ class Roofline:
             ax = plt.gca()
 
             # Calculate arithmetic intensity for all points
-            intensities = [p['throughput'] / p['data_amount'] for p in self.points]
+            intensities = [p['intensity'] for p in self.points]
             performances = [p['throughput'] for p in self.points]
             
             # Plot roofline
@@ -67,7 +67,7 @@ class Roofline:
             for i, category in enumerate(categories):
                 cat_points = [p for p in self.points if p['category'] == category]
                 c = self.category_colors.get(category, self._color_cycle[i % len(self._color_cycle)])
-                x = [p['throughput'] / p['data_amount'] for p in cat_points]
+                x = [p['intensity'] for p in cat_points]
                 y = [p['throughput'] for p in cat_points]
                 plt.scatter(x, y, color=c, label=category, zorder=10)
 
