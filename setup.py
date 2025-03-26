@@ -17,7 +17,7 @@ setup(
     python_requires=">=3.8",
     description="A simple roofline plotter for visualizing performance data",
     long_description=long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
     author="chickenjohn",
     author_email="chickenjohn93@outlook.com",
     url="https://github.com/chickenjohn/roofline-plotter",
