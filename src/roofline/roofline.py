@@ -63,13 +63,14 @@ class Roofline:
             plt.plot(ai, roof, 'k--', label='Roofline')
             
             # Plot points with category colors
-            categories = {p['category'] for p in self.points}
+            categories = [p['category'] for p in self.points]
+            categories = sorted(categories)
             for i, category in enumerate(categories):
                 cat_points = [p for p in self.points if p['category'] == category]
-                c = self.category_colors.get(category, self._color_cycle[i % len(self._color_cycle)])
+                c = self.category_colors[category]
                 x = [p['intensity'] for p in cat_points]
                 y = [p['throughput'] for p in cat_points]
-                plt.scatter(x, y, color=c, label=category, zorder=10)
+                plt.scatter(x, y, color=c, label=category, zorder=10, alpha=0.1)
 
             plt.xscale('log')
             plt.yscale('log')
