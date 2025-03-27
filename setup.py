@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="roofline-plotter",
-    version="0.1.1",
+    version="0.1.1.post0",
     license="MIT",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
